@@ -8,14 +8,26 @@ The hook uses the [requestIdleCallback](https://caniuse.com/#feat=requestidlecal
 
 The code is inspired by [Philip Walton's article about the Idle Until Urgent strategy](https://philipwalton.com/articles/idle-until-urgent/), and [Josh Duff's idle-until-urgent package](https://github.com/TehShrike/idle-until-urgent)
 
-# Usage
+## Installation
+
+```bash
+$ npm i @use-it/event-listener
+```
+
+or
+
+```bash
+$ yarn add @use-it/event-listener
+```
+
+# Example
 
 The following component will load the IdleUntilUrgentlyLoadedCompoent when the main tread is idle for the first time, or the first time we pass `getNow` is `true`. IdleUntilUrgentlyLoadedCompoent is displayed when it is loaded but while waiting to load or loading `<div>Loading...</div>` is displayed.
 
 ```javascript
 const Component = props => {
   const { getNow } = props;
-  const FilterTabs = useIdleUntilUrgent(
+  const IdleUntilUrgentlyLoadedCompoent = useIdleUntilUrgent(
     () => import("./IdleUntilUrgentlyLoadedCompoent"),
     {
       fallback: <div>Loading...</div>, // default null
