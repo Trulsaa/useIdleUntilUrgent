@@ -30,12 +30,13 @@ const makeIdleGetter = (workFn, options) => {
 
 const useIdleUntilUrgent = (
   func,
-  { fallback, getNow } = {
+  options = {
     fallback: null,
     getNow: false,
     timeoutFallbackMs: 5000
   }
 ) => {
+  const { fallback, getNow } = options;
   const [{ idleGetter }, setIdleGetter] = useState({
     idleGetter: () => ({})
   });
