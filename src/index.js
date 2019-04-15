@@ -1,3 +1,5 @@
+import { useState, useEffect } from "react";
+
 const idleish = (fn, timeoutFallbackMs = 10000) => {
   if ("requestIdleCallback" in window) {
     const handle = requestIdleCallback(fn);
@@ -48,6 +50,8 @@ const useIdleUntilUrgent = (func, fallback, getNow) => {
   if (!!result) {
     return result.component;
   } else {
-    return () => <div>{fallback}</div>;
+    return () => fallback;
   }
 };
+
+export default useIdleUntilUrgent;

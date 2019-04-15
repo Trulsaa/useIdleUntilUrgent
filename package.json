@@ -1,0 +1,46 @@
+{
+  "name": "use-idle-until-urgent",
+  "publishConfig": {
+    "access": "public"
+  },
+  "version": "0.0.1",
+  "description": "React hook that enables easy use of the idle until urgent component loading strategy",
+  "main": "use-idle-until-urgent",
+  "umd:main": "dist/use-idle-until-urgent.umd.js",
+  "module": "dist/use-idle-until-urgent.m.js",
+  "source": "src/index.js",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Trulsaa/useIdleUntilUrgent.git"
+  },
+  "scripts": {
+    "build": "microbundle -o dist/ --sourcemap false --target web",
+    "dev": "microbundle watch -o dist/ --sourcemap false --compress false"
+  },
+  "keywords": [
+    "react-hooks",
+    "hooks",
+    "react",
+    "utils",
+    "lib",
+    "idle-until-urgent"
+  ],
+  "author": "Trulsaa",
+  "bugs": {
+    "url": "https://github.com/Trulsaa/useIdleUntilUrgent/issues"
+  },
+  "homepage": "https://github.com/Trulsaa/useIdleUntilUrgent#readme",
+  "peerDependencies": {
+    "react": "^16.8.x"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.2.2",
+    "@babel/preset-env": "^7.2.3",
+    "@babel/preset-react": "^7.0.0",
+    "babel-core": "^7.0.0-bridge.0",
+    "microbundle": "^0.11.0",
+    "react": "^16.8.0",
+    "react-dom": "^16.8.0"
+  }
+}
