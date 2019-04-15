@@ -10,15 +10,17 @@ The code is inspired by [Philip Walton's article about the Idle Until Urgent str
 
 # Usage
 
-The following component will load the IdleUntilUrgentlyLoadedCompoent when the main tread is idle for the first time, or the first time we pass `loadNow === true`. IdleUntilUrgentlyLoadedCompoent is displayed when it is loaded but while waiting to load or loading `<div>Loading...</div>` is displayed.
+The following component will load the IdleUntilUrgentlyLoadedCompoent when the main tread is idle for the first time, or the first time we pass `getNow` is `true`. IdleUntilUrgentlyLoadedCompoent is displayed when it is loaded but while waiting to load or loading `<div>Loading...</div>` is displayed.
 
 ```javascript
 const Component = props => {
-  const { loadNow } = props;
+  const { getNow } = props;
   const FilterTabs = useIdleUntilUrgent(
     () => import("./IdleUntilUrgentlyLoadedCompoent"),
-    <div>Loading...</div>,
-    loadNow
+    {
+      fallback: <div>Loading...</div>,
+      getNow
+    }
   );
 
   return <IdleUntilUrgentlyLoadedCompoent />;

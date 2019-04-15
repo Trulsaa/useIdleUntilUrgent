@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 
-const idleish = (fn, timeoutFallbackMs = 5000) => {
+const idleish = (fn, { timeoutFallbackMs }) => {
   if ("requestIdleCallback" in window) {
     const handle = requestIdleCallback(fn);
     return () => cancelIdleCallback(handle);
@@ -10,13 +10,13 @@ const idleish = (fn, timeoutFallbackMs = 5000) => {
   }
 };
 
-const makeIdleGetter = workFn => {
+const makeIdleGetter = (workFn, options) => {
   const UNLOADED = {};
   let result = UNLOADED;
 
   const clear = idleish(() => {
     result = workFn();
-  });
+  }, options);
 
   return async () => {
     if (result === UNLOADED) {
@@ -28,7 +28,14 @@ const makeIdleGetter = workFn => {
   };
 };
 
-const useIdleUntilUrgent = (func, fallback = null, getNow = false) => {
+const useIdleUntilUrgent = (
+  func,
+  { fallback, getNow } = {
+    fallback: null,
+    getNow: false,
+    timeoutFallbackMs: 5000
+  }
+) => {
   const [{ idleGetter }, setIdleGetter] = useState({
     idleGetter: () => ({})
   });
@@ -40,7 +47,7 @@ const useIdleUntilUrgent = (func, fallback = null, getNow = false) => {
   };
 
   useEffect(() => {
-    setIdleGetter({ idleGetter: makeIdleGetter(workFn) });
+    setIdleGetter({ idleGetter: makeIdleGetter(workFn, options) });
   }, []);
 
   if (getNow && !result) {
