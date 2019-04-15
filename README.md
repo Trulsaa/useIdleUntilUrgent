@@ -27,8 +27,8 @@ The following component will load the IdleUntilUrgentlyLoadedCompoent when the m
 ```javascript
 const Component = props => {
   const { getNow } = props;
-  const IdleUntilUrgentlyLoadedCompoent = useIdleUntilUrgent(
-    () => import("./IdleUntilUrgentlyLoadedCompoent"),
+  const IdleUntilUrgentlyLoadedComponent = useIdleUntilUrgent(
+    () => import("./IdleUntilUrgentlyLoadedComponent"),
     {
       fallback: <div>Loading...</div>, // default null
       getNow, // default false, set this to true on user input to immediately load the component.
@@ -36,6 +36,6 @@ const Component = props => {
     }
   );
 
-  return <IdleUntilUrgentlyLoadedCompoent />;
+  return <IdleUntilUrgentlyLoadedComponent />;
 };
 ```
