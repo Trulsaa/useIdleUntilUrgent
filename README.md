@@ -1,8 +1,8 @@
 # useIdleUntilUrgent
 
-React hook that enables easy use of the idle until urgent component loading strategy. This strategy involves fetching resources lazily - either whnever the browser is next idle, or when you request the resources.
+React hook that enables easy use of the idle until urgent component loading strategy. This strategy involves fetching resources lazily - either whenever the browser is next idle, or when you request the resources.
 
-This hook takes a function that invokes and returns the result of an `import("paht")` function that imports a react component. It then returns the compoenent when it has been loaded. In the meantime it returns null or the second optional argument.
+This hook takes a function that invokes and returns the result of an `import("paht")` function that imports a react component. It then returns the component when it has been loaded. In the meantime it returns `null` or the `fallback` value if the optional options object.
 
 The hook uses the [requestIdleCallback](https://caniuse.com/#feat=requestidlecallback) function supported by many modern browsers. If it is not supported then the hook uses `setTimeout(fn, 5000)`
 
@@ -18,8 +18,9 @@ const Component = props => {
   const FilterTabs = useIdleUntilUrgent(
     () => import("./IdleUntilUrgentlyLoadedCompoent"),
     {
-      fallback: <div>Loading...</div>,
-      getNow
+      fallback: <div>Loading...</div>, // default null
+      getNow, // default false, set this to true on user input to immediately load the component.
+      timeoutFallbackMs: 5000 // default 5000 ms
     }
   );
 
