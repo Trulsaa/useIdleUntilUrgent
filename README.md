@@ -11,13 +11,13 @@ The code is inspired by [Philip Walton's article about the Idle Until Urgent str
 ## Installation
 
 ```bash
-$ npm i @use-it/event-listener
+$ npm i use-idle-until-urgent
 ```
 
 or
 
 ```bash
-$ yarn add @use-it/event-listener
+$ yarn add use-idle-until-urgent
 ```
 
 # Example
