@@ -29,13 +29,15 @@ const Component = props => {
   const { getNow } = props;
   const IdleUntilUrgentlyLoadedComponent = useIdleUntilUrgent(
     () => import("./IdleUntilUrgentlyLoadedComponent"),
-    {
+    { // Optional options object
       fallback: <div>Loading...</div>, // default null
       getNow, // default false, set this to true on user input to immediately load the component.
       timeoutFallbackMs: 5000 // default 5000 ms
     }
   );
 
-  return <IdleUntilUrgentlyLoadedComponent />;
+  return (
+    IdleUntilUrgentlyLoadedComponent && <IdleUntilUrgentlyLoadedComponent />
+  );
 };
 ```
