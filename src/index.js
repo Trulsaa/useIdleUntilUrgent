@@ -36,7 +36,14 @@ const useIdleUntilUrgent = (
     timeoutFallbackMs: 5000
   }
 ) => {
-  const { fallback, getNow } = options;
+  let { fallback, getNow, timeoutFallbackMs } = options;
+
+  fallback = typeof fallback === "undefined" ? fallback : null;
+  getNow = typeof getNow === "undefined" ? getNow : false;
+  timeoutFallbackMs =
+    typeof timeoutFallbackMs === "undefined" ? timeoutFallbackMs : 5000;
+  options = { fallback, getNow, timeoutFallbackMs };
+
   const [{ idleGetter }, setIdleGetter] = useState({
     idleGetter: () => ({})
   });
