@@ -51,7 +51,7 @@ const useIdleUntilUrgent = (
 
   const workFn = async () => {
     const result = await func();
-    setComponent({ component: result.default });
+    setComponent({ payload: result });
   };
 
   useEffect(() => {
@@ -63,9 +63,9 @@ const useIdleUntilUrgent = (
   }
 
   if (!!result) {
-    return result.component;
+    return result.payload;
   } else {
-    return () => fallback;
+    return fallback;
   }
 };
 
