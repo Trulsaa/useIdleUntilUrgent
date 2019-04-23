@@ -44,9 +44,7 @@ const Component = props => {
     }
   );
 
-  return (
-    IdleUntilUrgentlyLoadedComponent && <IdleUntilUrgentlyLoadedComponent />
-  );
+  return <IdleUntilUrgentlyLoadedComponent />;
 };
 
 export default Component;
