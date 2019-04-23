@@ -1,8 +1,8 @@
 # useIdleUntilUrgent
 
-React hook that enables easy use of the idle until urgent component loading strategy. This strategy involves fetching resources lazily - either whenever the browser is next idle, or when you request the resources.
+React hook that enables easy use of the idle until urgent loading strategy. This strategy involves fetching resources lazily - either whenever the browser is next idle, or when you request the resources.
 
-This hook takes a function that invokes and returns the result of an `import("paht")` function that imports a react component. It then returns the component when it has been loaded. In the meantime it returns `null` or the `fallback` value if the optional options object.
+This hook takes a function that invokes and returns a Promise. It then returns the result when it has been loaded. In the meantime it returns `null` or the `fallback` value if the optional options object.
 
 The hook uses the [requestIdleCallback](https://caniuse.com/#feat=requestidlecallback) function supported by many modern browsers. If it is not supported then the hook uses `setTimeout(fn, 5000)`
 
@@ -20,11 +20,15 @@ or
 $ yarn add use-idle-until-urgent
 ```
 
-# Example
+# Example of loading a component
 
 The following component will load the IdleUntilUrgentlyLoadedCompoent when the main tread is idle for the first time, or the first time we pass `getNow` is `true`. IdleUntilUrgentlyLoadedCompoent is displayed when it is loaded but while waiting to load or loading `<div>Loading...</div>` is displayed.
 
 ```javascript
+import React from "react";
+
+import useIdleUntilUrgent from "use-idle-until-urgent";
+
 const Component = props => {
   const { getNow } = props;
   const IdleUntilUrgentlyLoadedComponent = useIdleUntilUrgent(
@@ -44,4 +48,6 @@ const Component = props => {
     IdleUntilUrgentlyLoadedComponent && <IdleUntilUrgentlyLoadedComponent />
   );
 };
+
+export default Component;
 ```
