@@ -3,7 +3,7 @@
   "publishConfig": {
     "access": "public"
   },
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "React hook that enables easy use of the idle until urgent component loading strategy",
   "main": "dist/use-idle-until-urgent.js",
   "umd:main": "dist/use-idle-until-urgent.umd.js",
