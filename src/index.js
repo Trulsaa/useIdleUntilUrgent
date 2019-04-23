@@ -18,7 +18,7 @@ const makeIdleGetter = (workFn, options) => {
     result = workFn();
   }, options);
 
-  return async () => {
+  return () => {
     if (result === UNLOADED) {
       result = workFn();
       clear();
@@ -28,30 +28,22 @@ const makeIdleGetter = (workFn, options) => {
   };
 };
 
-const useIdleUntilUrgent = (
-  func,
-  options = {
-    fallback: null,
-    getNow: false,
-    timeoutFallbackMs: 5000
-  }
-) => {
+const useIdleUntilUrgent = (func, options) => {
   let { fallback, getNow, timeoutFallbackMs } = options;
-
-  fallback = typeof fallback === "undefined" ? fallback : null;
-  getNow = typeof getNow === "undefined" ? getNow : false;
+  fallback = typeof fallback !== "undefined" ? fallback : null;
+  getNow = typeof getNow !== "undefined" ? getNow : false;
   timeoutFallbackMs =
-    typeof timeoutFallbackMs === "undefined" ? timeoutFallbackMs : 5000;
+    typeof timeoutFallbackMs !== "undefined" ? timeoutFallbackMs : 5000;
   options = { fallback, getNow, timeoutFallbackMs };
 
   const [{ idleGetter }, setIdleGetter] = useState({
     idleGetter: () => ({})
   });
-  const [result, setComponent] = useState();
+  const [result, setResult] = useState();
 
   const workFn = async () => {
     const result = await func();
-    setComponent({ payload: result });
+    setResult({ payload: result });
   };
 
   useEffect(() => {
