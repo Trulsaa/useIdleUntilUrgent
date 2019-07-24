@@ -30,7 +30,7 @@ import React from "react";
 import useIdleUntilUrgent from "use-idle-until-urgent";
 
 const Component = props => {
-  const { getNow } = props;
+  const { getNow, onLoad } = props;
   const IdleUntilUrgentlyLoadedComponent = useIdleUntilUrgent(
     async () => {
       const module = await import("./IdleUntilUrgentlyLoadedComponent");
@@ -41,6 +41,7 @@ const Component = props => {
       fallback: () => <div>Loading...</div>, // default null
       getNow, // default false, set this to true on user input to immediately load the component.
       timeoutFallbackMs: 5000 // default 5000 ms
+      onLoad, // default () => {}, this is a function that gets called when the idle content is loaded.
     }
   );
 
