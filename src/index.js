@@ -29,7 +29,8 @@ const makeIdleGetter = (workFn, options) => {
 };
 
 const useIdleUntilUrgent = (func, options) => {
-  let { fallback, getNow, timeoutFallbackMs } = options;
+  let { fallback, getNow, onLoad, timeoutFallbackMs } = options;
+  onLoad = typeof onLoad !== "undefined" ? onLoad : () => {};
   fallback = typeof fallback !== "undefined" ? fallback : null;
   getNow = typeof getNow !== "undefined" ? getNow : false;
   timeoutFallbackMs =
@@ -55,6 +56,7 @@ const useIdleUntilUrgent = (func, options) => {
   }
 
   if (!!result) {
+    onLoad();
     return result.payload;
   } else {
     return fallback;
