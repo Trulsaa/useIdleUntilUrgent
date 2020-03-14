@@ -15,8 +15,8 @@
     "url": "git+https://github.com/Trulsaa/useIdleUntilUrgent.git"
   },
   "scripts": {
-    "build": "microbundle -o dist/ --sourcemap false --target web",
-    "dev": "microbundle watch -o dist/ --sourcemap false --compress false"
+    "build": "npx microbundle -o dist/ --sourcemap false --target web",
+    "dev": "npx microbundle watch -o dist/ --sourcemap false --compress false"
   },
   "keywords": [
     "react-hooks",
