@@ -18,20 +18,8 @@ jobs:
           node-version: 12
       - run: npm run build
 
-  version-bump:
+  publish:
     needs: build
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-      - name: Update version and push
-        run: |
-          git config --global user.name "Truls Aagaard"
-          git config --global user.email "truls@aagaard.io"
-          npm version patch
-          git push
-
-  publish-npm:
-    needs: [build, version-bump] 
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -39,7 +27,13 @@ jobs:
         with:
           node-version: 12
           registry-url: https://registry.npmjs.org/
-      - run: npm run build
-      - run: npm publish
+      - name: Update version and push
         env:
           NODE_AUTH_TOKEN: ${{secrets.npm_token}}
+        run: |
+          git config --global user.name "Truls Aagaard"
+          git config --global user.email "truls@aagaard.io"
+          npm version patch
+          git push
+          npm run build
+          npm publish
