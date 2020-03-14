@@ -25,8 +25,8 @@ jobs:
       - uses: actions/checkout@v2
       - name: Update version and push
         run: |
-          git config --global user.name Truls Aagaard"
-          git config --global user.email 'truls@aagaard.io'
+          git config --global user.name "Truls Aagaard"
+          git config --global user.email "truls@aagaard.io"
           npm version patch
           git push
 
